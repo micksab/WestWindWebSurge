@@ -124,18 +124,11 @@
             this.tbExportXml = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.btnExportResultSummary = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbImport = new System.Windows.Forms.ToolStripButton();
             this.tbCharts = new System.Windows.Forms.ToolStripSplitButton();
             this.tbRequestPerSecondChart = new System.Windows.Forms.ToolStripMenuItem();
             this.tbTimeTakenPerUrlChart = new System.Windows.Forms.ToolStripMenuItem();
             this.tbResponseTimesDistributionChart = new System.Windows.Forms.ToolStripMenuItem();
-            this.OptionsToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.tbtxtTimeToRun = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.lblTbThreads = new System.Windows.Forms.ToolStripLabel();
-            this.tbtxtThreads = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tbNoProgressEvents = new System.Windows.Forms.ToolStripButton();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,10 +175,16 @@
             this.btnCheckForNewVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.OptionsToolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.tbtxtTimeToRun = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.lblTbThreads = new System.Windows.Forms.ToolStripLabel();
+            this.tbtxtThreads = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbNoProgressEvents = new System.Windows.Forms.ToolStripButton();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Help = new System.Windows.Forms.HelpProvider();
-            this.tbImport = new System.Windows.Forms.ToolStripSplitButton();
-            this.tbImportJson = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer.ContentPanel.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
@@ -212,8 +211,8 @@
             this.HeadersContentSplitter.SuspendLayout();
             this.tabOptions.SuspendLayout();
             this.MainToolStrip.SuspendLayout();
-            this.OptionsToolStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
+            this.OptionsToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer
@@ -457,7 +456,7 @@
             this.ListRequests.Margin = new System.Windows.Forms.Padding(0);
             this.ListRequests.Name = "ListRequests";
             this.ListRequests.ShowItemToolTips = true;
-            this.ListRequests.Size = new System.Drawing.Size(434, 470);
+            this.ListRequests.Size = new System.Drawing.Size(434, 474);
             this.ListRequests.SmallImageList = this.Images;
             this.ListRequests.TabIndex = 1;
             this.ListRequests.UseCompatibleStateImageBehavior = false;
@@ -646,7 +645,7 @@
             this.tbResultCharts,
             this.tbImportWebSurgeResults});
             this.ResultContextMenu.Name = "ResultContextMenu";
-            this.ResultContextMenu.Size = new System.Drawing.Size(208, 48);
+            this.ResultContextMenu.Size = new System.Drawing.Size(153, 70);
             this.ResultContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuItemClickedToButtonHandler_Click);
             // 
             // tbResultCharts
@@ -692,10 +691,10 @@
             // 
             // tbImportWebSurgeResults
             // 
-            this.tbImportWebSurgeResults.Enabled = false;
             this.tbImportWebSurgeResults.Name = "tbImportWebSurgeResults";
-            this.tbImportWebSurgeResults.Size = new System.Drawing.Size(207, 22);
-            this.tbImportWebSurgeResults.Text = "Import WebSurge Results";
+            this.tbImportWebSurgeResults.Size = new System.Drawing.Size(152, 22);
+            this.tbImportWebSurgeResults.Text = "Import Results";
+            this.tbImportWebSurgeResults.Click += new System.EventHandler(this.ButtonHandler);
             // 
             // lblRequestCount
             // 
@@ -1110,7 +1109,7 @@
             this.MainToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.MainToolStrip.Location = new System.Drawing.Point(3, 0);
             this.MainToolStrip.Name = "MainToolStrip";
-            this.MainToolStrip.Size = new System.Drawing.Size(579, 25);
+            this.MainToolStrip.Size = new System.Drawing.Size(536, 25);
             this.MainToolStrip.TabIndex = 1;
             // 
             // tbOpen
@@ -1210,6 +1209,15 @@
             this.btnExportResultSummary.ToolTipText = "Export summarized results to a JSON document";
             this.btnExportResultSummary.Click += new System.EventHandler(this.ButtonHandler);
             // 
+            // tbImport
+            // 
+            this.tbImport.Image = ((System.Drawing.Image)(resources.GetObject("tbImport.Image")));
+            this.tbImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbImport.Name = "tbImport";
+            this.tbImport.Size = new System.Drawing.Size(105, 22);
+            this.tbImport.Text = "Import Results";
+            this.tbImport.Click += new System.EventHandler(this.ButtonHandler);
+            // 
             // tbCharts
             // 
             this.tbCharts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1241,74 +1249,6 @@
             this.tbResponseTimesDistributionChart.Name = "tbResponseTimesDistributionChart";
             this.tbResponseTimesDistributionChart.Size = new System.Drawing.Size(254, 22);
             this.tbResponseTimesDistributionChart.Text = "Response Time Distribution Graph";
-            // 
-            // OptionsToolStrip
-            // 
-            this.OptionsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.OptionsToolStrip.ImageScalingSize = new System.Drawing.Size(18, 18);
-            this.OptionsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel2,
-            this.tbtxtTimeToRun,
-            this.toolStripLabel3,
-            this.lblTbThreads,
-            this.tbtxtThreads,
-            this.toolStripSeparator5,
-            this.tbNoProgressEvents});
-            this.OptionsToolStrip.Location = new System.Drawing.Point(3, 49);
-            this.OptionsToolStrip.Name = "OptionsToolStrip";
-            this.OptionsToolStrip.Size = new System.Drawing.Size(259, 25);
-            this.OptionsToolStrip.TabIndex = 2;
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(37, 22);
-            this.toolStripLabel2.Text = "Time:";
-            // 
-            // tbtxtTimeToRun
-            // 
-            this.tbtxtTimeToRun.Name = "tbtxtTimeToRun";
-            this.tbtxtTimeToRun.Size = new System.Drawing.Size(43, 25);
-            this.tbtxtTimeToRun.Text = "30";
-            this.tbtxtTimeToRun.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tbtxtTimeToRun.ToolTipText = "Duration of the test to run in seconds.";
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(38, 22);
-            this.toolStripLabel3.Text = "secs   ";
-            // 
-            // lblTbThreads
-            // 
-            this.lblTbThreads.Name = "lblTbThreads";
-            this.lblTbThreads.Size = new System.Drawing.Size(52, 22);
-            this.lblTbThreads.Text = "Threads:";
-            // 
-            // tbtxtThreads
-            // 
-            this.tbtxtThreads.Name = "tbtxtThreads";
-            this.tbtxtThreads.Size = new System.Drawing.Size(44, 25);
-            this.tbtxtThreads.Text = "2";
-            this.tbtxtThreads.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tbtxtThreads.ToolTipText = "The number of sessions to run simultaneously";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tbNoProgressEvents
-            // 
-            this.tbNoProgressEvents.CheckOnClick = true;
-            this.tbNoProgressEvents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbNoProgressEvents.Image = ((System.Drawing.Image)(resources.GetObject("tbNoProgressEvents.Image")));
-            this.tbNoProgressEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbNoProgressEvents.Name = "tbNoProgressEvents";
-            this.tbNoProgressEvents.Size = new System.Drawing.Size(23, 22);
-            this.tbNoProgressEvents.Text = "No Console";
-            this.tbNoProgressEvents.ToolTipText = "Don\'t show progress info - faster, can create more requests.";
-            this.tbNoProgressEvents.CheckedChanged += new System.EventHandler(this.tbNoProgressEvents_CheckedChanged);
             // 
             // MainMenu
             // 
@@ -1667,25 +1607,77 @@
             this.btnAbout.Text = "&About";
             this.btnAbout.Click += new System.EventHandler(this.ButtonHandler);
             // 
+            // OptionsToolStrip
+            // 
+            this.OptionsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.OptionsToolStrip.ImageScalingSize = new System.Drawing.Size(18, 18);
+            this.OptionsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel2,
+            this.tbtxtTimeToRun,
+            this.toolStripLabel3,
+            this.lblTbThreads,
+            this.tbtxtThreads,
+            this.toolStripSeparator5,
+            this.tbNoProgressEvents});
+            this.OptionsToolStrip.Location = new System.Drawing.Point(3, 49);
+            this.OptionsToolStrip.Name = "OptionsToolStrip";
+            this.OptionsToolStrip.Size = new System.Drawing.Size(259, 25);
+            this.OptionsToolStrip.TabIndex = 2;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(37, 22);
+            this.toolStripLabel2.Text = "Time:";
+            // 
+            // tbtxtTimeToRun
+            // 
+            this.tbtxtTimeToRun.Name = "tbtxtTimeToRun";
+            this.tbtxtTimeToRun.Size = new System.Drawing.Size(43, 25);
+            this.tbtxtTimeToRun.Text = "30";
+            this.tbtxtTimeToRun.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbtxtTimeToRun.ToolTipText = "Duration of the test to run in seconds.";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(38, 22);
+            this.toolStripLabel3.Text = "secs   ";
+            // 
+            // lblTbThreads
+            // 
+            this.lblTbThreads.Name = "lblTbThreads";
+            this.lblTbThreads.Size = new System.Drawing.Size(52, 22);
+            this.lblTbThreads.Text = "Threads:";
+            // 
+            // tbtxtThreads
+            // 
+            this.tbtxtThreads.Name = "tbtxtThreads";
+            this.tbtxtThreads.Size = new System.Drawing.Size(44, 25);
+            this.tbtxtThreads.Text = "2";
+            this.tbtxtThreads.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbtxtThreads.ToolTipText = "The number of sessions to run simultaneously";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tbNoProgressEvents
+            // 
+            this.tbNoProgressEvents.CheckOnClick = true;
+            this.tbNoProgressEvents.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbNoProgressEvents.Image = ((System.Drawing.Image)(resources.GetObject("tbNoProgressEvents.Image")));
+            this.tbNoProgressEvents.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbNoProgressEvents.Name = "tbNoProgressEvents";
+            this.tbNoProgressEvents.Size = new System.Drawing.Size(23, 22);
+            this.tbNoProgressEvents.Text = "No Console";
+            this.tbNoProgressEvents.ToolTipText = "Don\'t show progress info - faster, can create more requests.";
+            this.tbNoProgressEvents.CheckedChanged += new System.EventHandler(this.tbNoProgressEvents_CheckedChanged);
+            // 
             // Help
             // 
             this.Help.HelpNamespace = "WebSurge.chm";
-            // 
-            // tbImport
-            // 
-            this.tbImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tbImportJson});
-            this.tbImport.Image = ((System.Drawing.Image)(resources.GetObject("tbImport.Image")));
-            this.tbImport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbImport.Name = "tbImport";
-            this.tbImport.Size = new System.Drawing.Size(117, 22);
-            this.tbImport.Text = "Import Results";
-            // 
-            // tbImportJson
-            // 
-            this.tbImportJson.Name = "tbImportJson";
-            this.tbImportJson.Size = new System.Drawing.Size(152, 22);
-            this.tbImportJson.Text = "Json";
             // 
             // StressTestForm
             // 
@@ -1747,10 +1739,10 @@
             this.tabOptions.ResumeLayout(false);
             this.MainToolStrip.ResumeLayout(false);
             this.MainToolStrip.PerformLayout();
-            this.OptionsToolStrip.ResumeLayout(false);
-            this.OptionsToolStrip.PerformLayout();
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
+            this.OptionsToolStrip.ResumeLayout(false);
+            this.OptionsToolStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1912,8 +1904,7 @@
         private System.Windows.Forms.ToolStripMenuItem tbResponseTimesDistributionChart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
         private System.Windows.Forms.ToolStripMenuItem tbResponseTimeDistributionChart;
-        private System.Windows.Forms.ToolStripSplitButton tbImport;
-        private System.Windows.Forms.ToolStripMenuItem tbImportJson;
+        private System.Windows.Forms.ToolStripButton tbImport;
     }
 }
 

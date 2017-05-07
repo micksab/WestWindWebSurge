@@ -1011,7 +1011,7 @@ namespace WebSurge
             FixClickFocus();
 
             if (sender == tbOpen || sender == btnOpen ||
-                sender == tbOpenFromDropbox || sender == tbOpenFromOneDrive ||                
+                sender == tbOpenFromDropbox || sender == tbOpenFromOneDrive ||
                 sender == txtProcessingTime)
             {
                 string path = null;
@@ -1025,7 +1025,7 @@ namespace WebSurge
                     DefaultExt = ".websurge;.txt;.log",
                     Filter = "WebSurge files (*.websurge)|*.websurge|Text files (*.txt)|*.txt|Log Files (*.log)|*.log|All Files (*.*)|*.*",
                     CheckFileExists = true,
-                    RestoreDirectory = true,                    
+                    RestoreDirectory = true,
                     FileName = "",
                     Title = "Open WebSurge Request File"
                 };
@@ -1062,8 +1062,8 @@ namespace WebSurge
             {
                 if (!string.IsNullOrEmpty(FileName))
                 {
-                    Process.Start(new ProcessStartInfo("notepad.exe", FileName) {UseShellExecute = true});
-                    AttachWatcher(FileName);                 
+                    Process.Start(new ProcessStartInfo("notepad.exe", FileName) { UseShellExecute = true });
+                    AttachWatcher(FileName);
                 }
             }
             else if (sender == btnAbout)
@@ -1094,6 +1094,12 @@ namespace WebSurge
                 Export("raw");
             else if (sender == btnExportResultSummary)
                 Export("results");
+            else if (sender == tbImport || sender== tbImportWebSurgeResults)
+            {
+                ImportResultsForm importForm = new ImportResultsForm(StressTester.Results);
+                importForm.ShowDialog();
+            }
+                
 
 
             if (sender == tbTimeTakenPerUrl || sender == tbTimeTakenPerUrlChart || sender == btnTimeTakenPerUrlChart)

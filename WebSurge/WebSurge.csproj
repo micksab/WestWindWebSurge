@@ -114,6 +114,12 @@
     <Compile Include="FiddlerCapture.Designer.cs">
       <DependentUpon>FiddlerCapture.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportResultsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportResultsForm.Designer.cs">
+      <DependentUpon>ImportResultsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegisterDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FiddlerCapture.resx">
       <DependentUpon>FiddlerCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportResultsForm.resx">
+      <DependentUpon>ImportResultsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterDialog.resx">
       <DependentUpon>RegisterDialog.cs</DependentUpon>
@@ -221,7 +230,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- 
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
