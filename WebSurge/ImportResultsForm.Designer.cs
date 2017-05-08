@@ -35,15 +35,19 @@
             this.tbImportJson = new System.Windows.Forms.ToolStripMenuItem();
             this.tbImportXml = new System.Windows.Forms.ToolStripMenuItem();
             this.lblSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.setsSplitContainer = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.setsSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.importedFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.includedFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblSplitContainer)).BeginInit();
             this.lblSplitContainer.Panel1.SuspendLayout();
             this.lblSplitContainer.Panel2.SuspendLayout();
             this.lblSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.setsSplitContainer)).BeginInit();
+            this.setsSplitContainer.Panel1.SuspendLayout();
+            this.setsSplitContainer.Panel2.SuspendLayout();
             this.setsSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,14 +78,14 @@
             // 
             this.tbImportRaw.Enabled = false;
             this.tbImportRaw.Name = "tbImportRaw";
-            this.tbImportRaw.Size = new System.Drawing.Size(152, 22);
+            this.tbImportRaw.Size = new System.Drawing.Size(128, 22);
             this.tbImportRaw.Text = "WebSurge";
             this.tbImportRaw.Click += new System.EventHandler(this.ButtonClick);
             // 
             // tbImportJson
             // 
             this.tbImportJson.Name = "tbImportJson";
-            this.tbImportJson.Size = new System.Drawing.Size(152, 22);
+            this.tbImportJson.Size = new System.Drawing.Size(128, 22);
             this.tbImportJson.Text = "Json";
             this.tbImportJson.Click += new System.EventHandler(this.ButtonClick);
             // 
@@ -89,7 +93,7 @@
             // 
             this.tbImportXml.Enabled = false;
             this.tbImportXml.Name = "tbImportXml";
-            this.tbImportXml.Size = new System.Drawing.Size(152, 22);
+            this.tbImportXml.Size = new System.Drawing.Size(128, 22);
             this.tbImportXml.Text = "Xml";
             this.tbImportXml.Click += new System.EventHandler(this.ButtonClick);
             // 
@@ -113,18 +117,6 @@
             this.lblSplitContainer.SplitterWidth = 1;
             this.lblSplitContainer.TabIndex = 2;
             // 
-            // setsSplitContainer
-            // 
-            this.setsSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.setsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.setsSplitContainer.IsSplitterFixed = true;
-            this.setsSplitContainer.Location = new System.Drawing.Point(0, 54);
-            this.setsSplitContainer.Name = "setsSplitContainer";
-            this.setsSplitContainer.Size = new System.Drawing.Size(784, 507);
-            this.setsSplitContainer.SplitterDistance = 392;
-            this.setsSplitContainer.SplitterWidth = 1;
-            this.setsSplitContainer.TabIndex = 3;
-            // 
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -147,6 +139,46 @@
             this.label2.Text = "Included Result Sets";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // setsSplitContainer
+            // 
+            this.setsSplitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.setsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.setsSplitContainer.IsSplitterFixed = true;
+            this.setsSplitContainer.Location = new System.Drawing.Point(0, 54);
+            this.setsSplitContainer.Name = "setsSplitContainer";
+            // 
+            // setsSplitContainer.Panel1
+            // 
+            this.setsSplitContainer.Panel1.Controls.Add(this.importedFlowPanel);
+            // 
+            // setsSplitContainer.Panel2
+            // 
+            this.setsSplitContainer.Panel2.Controls.Add(this.includedFlowPanel);
+            this.setsSplitContainer.Size = new System.Drawing.Size(784, 507);
+            this.setsSplitContainer.SplitterDistance = 392;
+            this.setsSplitContainer.SplitterWidth = 1;
+            this.setsSplitContainer.TabIndex = 3;
+            // 
+            // importedFlowPanel
+            // 
+            this.importedFlowPanel.AutoScroll = true;
+            this.importedFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.importedFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.importedFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.importedFlowPanel.Name = "importedFlowPanel";
+            this.importedFlowPanel.Size = new System.Drawing.Size(388, 503);
+            this.importedFlowPanel.TabIndex = 0;
+            // 
+            // includedFlowPanel
+            // 
+            this.includedFlowPanel.AutoScroll = true;
+            this.includedFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.includedFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.includedFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.includedFlowPanel.Name = "includedFlowPanel";
+            this.includedFlowPanel.Size = new System.Drawing.Size(387, 503);
+            this.includedFlowPanel.TabIndex = 1;
+            // 
             // ImportResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,12 +193,15 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "ImportResultsForm";
             this.Text = "Import Results";
+            this.Shown += new System.EventHandler(this.ImportResultsForm_Shown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.lblSplitContainer.Panel1.ResumeLayout(false);
             this.lblSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lblSplitContainer)).EndInit();
             this.lblSplitContainer.ResumeLayout(false);
+            this.setsSplitContainer.Panel1.ResumeLayout(false);
+            this.setsSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.setsSplitContainer)).EndInit();
             this.setsSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -185,5 +220,7 @@
         private System.Windows.Forms.SplitContainer setsSplitContainer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel importedFlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel includedFlowPanel;
     }
 }

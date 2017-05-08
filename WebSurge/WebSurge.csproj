@@ -126,6 +126,12 @@
     <Compile Include="RegisterDialog.Designer.cs">
       <DependentUpon>RegisterDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultSetControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResultSetControl.Designer.cs">
+      <DependentUpon>ResultSetControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Splash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterDialog.resx">
       <DependentUpon>RegisterDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultSetControl.resx">
+      <DependentUpon>ResultSetControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
