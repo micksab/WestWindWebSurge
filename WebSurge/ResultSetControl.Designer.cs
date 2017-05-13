@@ -44,18 +44,21 @@
             this.lblUrl = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.tlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlPanel
             // 
-            this.tlPanel.ColumnCount = 4;
+            this.tlPanel.ColumnCount = 5;
             this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.5F));
-            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.5F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tlPanel.Controls.Add(this.btnEdit, 3, 1);
             this.tlPanel.Controls.Add(this.btnUp, 2, 0);
-            this.tlPanel.Controls.Add(this.btnRight, 3, 1);
+            this.tlPanel.Controls.Add(this.btnRight, 4, 1);
             this.tlPanel.Controls.Add(this.btnLeft, 2, 1);
             this.tlPanel.Controls.Add(this.btnDown, 2, 4);
             this.tlPanel.Controls.Add(this.txtDate, 1, 2);
@@ -77,24 +80,24 @@
             this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlPanel.Size = new System.Drawing.Size(354, 109);
             this.tlPanel.TabIndex = 0;
             // 
             // btnUp
             // 
-            this.tlPanel.SetColumnSpan(this.btnUp, 2);
+            this.btnUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tlPanel.SetColumnSpan(this.btnUp, 3);
             this.btnUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(303, 3);
+            this.btnUp.Location = new System.Drawing.Point(274, 3);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(48, 15);
+            this.btnUp.Size = new System.Drawing.Size(77, 15);
             this.btnUp.TabIndex = 14;
             this.btnUp.UseVisualStyleBackColor = true;
             // 
             // btnRight
             // 
+            this.btnRight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnRight.Image = ((System.Drawing.Image)(resources.GetObject("btnRight.Image")));
             this.btnRight.Location = new System.Drawing.Point(329, 24);
@@ -106,23 +109,25 @@
             // 
             // btnLeft
             // 
+            this.btnLeft.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnLeft.Image")));
-            this.btnLeft.Location = new System.Drawing.Point(303, 24);
+            this.btnLeft.Location = new System.Drawing.Point(274, 24);
             this.btnLeft.Name = "btnLeft";
             this.tlPanel.SetRowSpan(this.btnLeft, 3);
-            this.btnLeft.Size = new System.Drawing.Size(20, 57);
+            this.btnLeft.Size = new System.Drawing.Size(18, 57);
             this.btnLeft.TabIndex = 12;
             this.btnLeft.UseVisualStyleBackColor = true;
             // 
             // btnDown
             // 
-            this.tlPanel.SetColumnSpan(this.btnDown, 2);
+            this.btnDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tlPanel.SetColumnSpan(this.btnDown, 3);
             this.btnDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDown.Image = ((System.Drawing.Image)(resources.GetObject("btnDown.Image")));
-            this.btnDown.Location = new System.Drawing.Point(303, 87);
+            this.btnDown.Location = new System.Drawing.Point(274, 87);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(48, 19);
+            this.btnDown.Size = new System.Drawing.Size(77, 19);
             this.btnDown.TabIndex = 11;
             this.btnDown.UseVisualStyleBackColor = true;
             // 
@@ -132,7 +137,7 @@
             this.txtDate.Location = new System.Drawing.Point(73, 45);
             this.txtDate.Name = "txtDate";
             this.txtDate.ReadOnly = true;
-            this.txtDate.Size = new System.Drawing.Size(224, 20);
+            this.txtDate.Size = new System.Drawing.Size(195, 20);
             this.txtDate.TabIndex = 9;
             // 
             // txtDuration
@@ -141,7 +146,7 @@
             this.txtDuration.Location = new System.Drawing.Point(73, 87);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.ReadOnly = true;
-            this.txtDuration.Size = new System.Drawing.Size(224, 20);
+            this.txtDuration.Size = new System.Drawing.Size(195, 20);
             this.txtDuration.TabIndex = 8;
             // 
             // txtUrl
@@ -150,7 +155,7 @@
             this.txtUrl.Location = new System.Drawing.Point(73, 24);
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.ReadOnly = true;
-            this.txtUrl.Size = new System.Drawing.Size(224, 20);
+            this.txtUrl.Size = new System.Drawing.Size(195, 20);
             this.txtUrl.TabIndex = 7;
             // 
             // txtFilename
@@ -159,7 +164,7 @@
             this.txtFilename.Location = new System.Drawing.Point(73, 66);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.ReadOnly = true;
-            this.txtFilename.Size = new System.Drawing.Size(224, 20);
+            this.txtFilename.Size = new System.Drawing.Size(195, 20);
             this.txtFilename.TabIndex = 6;
             // 
             // lblDuration
@@ -228,8 +233,20 @@
             this.txtTitle.Location = new System.Drawing.Point(73, 3);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.ReadOnly = true;
-            this.txtTitle.Size = new System.Drawing.Size(224, 20);
+            this.txtTitle.Size = new System.Drawing.Size(195, 20);
             this.txtTitle.TabIndex = 5;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(298, 24);
+            this.btnEdit.Name = "btnEdit";
+            this.tlPanel.SetRowSpan(this.btnEdit, 3);
+            this.btnEdit.Size = new System.Drawing.Size(25, 57);
+            this.btnEdit.TabIndex = 15;
+            this.btnEdit.UseVisualStyleBackColor = true;
             // 
             // ResultSetControl
             // 
@@ -263,5 +280,6 @@
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

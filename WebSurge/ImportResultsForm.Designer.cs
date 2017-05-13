@@ -80,14 +80,14 @@
             this.tbImportRaw.Name = "tbImportRaw";
             this.tbImportRaw.Size = new System.Drawing.Size(128, 22);
             this.tbImportRaw.Text = "WebSurge";
-            this.tbImportRaw.Click += new System.EventHandler(this.ButtonClick);
+            this.tbImportRaw.Click += new System.EventHandler(this.ImportButtonClick);
             // 
             // tbImportJson
             // 
             this.tbImportJson.Name = "tbImportJson";
             this.tbImportJson.Size = new System.Drawing.Size(128, 22);
             this.tbImportJson.Text = "Json";
-            this.tbImportJson.Click += new System.EventHandler(this.ButtonClick);
+            this.tbImportJson.Click += new System.EventHandler(this.ImportButtonClick);
             // 
             // tbImportXml
             // 
@@ -95,7 +95,7 @@
             this.tbImportXml.Name = "tbImportXml";
             this.tbImportXml.Size = new System.Drawing.Size(128, 22);
             this.tbImportXml.Text = "Xml";
-            this.tbImportXml.Click += new System.EventHandler(this.ButtonClick);
+            this.tbImportXml.Click += new System.EventHandler(this.ImportButtonClick);
             // 
             // lblSplitContainer
             // 
