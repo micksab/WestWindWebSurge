@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultSetControl));
             this.tlPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.btnUp = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.lblUrl = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.btnUp = new System.Windows.Forms.Button();
             this.tlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +81,17 @@
             this.tlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlPanel.Size = new System.Drawing.Size(354, 109);
             this.tlPanel.TabIndex = 0;
+            // 
+            // btnUp
+            // 
+            this.tlPanel.SetColumnSpan(this.btnUp, 2);
+            this.btnUp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
+            this.btnUp.Location = new System.Drawing.Point(303, 3);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(48, 15);
+            this.btnUp.TabIndex = 14;
+            this.btnUp.UseVisualStyleBackColor = true;
             // 
             // btnRight
             // 
@@ -219,17 +230,6 @@
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(224, 20);
             this.txtTitle.TabIndex = 5;
-            // 
-            // btnUp
-            // 
-            this.tlPanel.SetColumnSpan(this.btnUp, 2);
-            this.btnUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
-            this.btnUp.Location = new System.Drawing.Point(303, 3);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(48, 15);
-            this.btnUp.TabIndex = 14;
-            this.btnUp.UseVisualStyleBackColor = true;
             // 
             // ResultSetControl
             // 
