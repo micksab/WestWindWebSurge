@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultSetControl));
             this.tlPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.lblUrl = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.tlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +83,19 @@
             this.tlPanel.Size = new System.Drawing.Size(354, 109);
             this.tlPanel.TabIndex = 0;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(298, 24);
+            this.btnEdit.Name = "btnEdit";
+            this.tlPanel.SetRowSpan(this.btnEdit, 3);
+            this.btnEdit.Size = new System.Drawing.Size(25, 57);
+            this.btnEdit.TabIndex = 15;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.Button_Click);
+            // 
             // btnUp
             // 
             this.btnUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -94,6 +107,7 @@
             this.btnUp.Size = new System.Drawing.Size(77, 15);
             this.btnUp.TabIndex = 14;
             this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.Button_Click);
             // 
             // btnRight
             // 
@@ -106,6 +120,7 @@
             this.btnRight.Size = new System.Drawing.Size(22, 57);
             this.btnRight.TabIndex = 13;
             this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.Click += new System.EventHandler(this.Button_Click);
             // 
             // btnLeft
             // 
@@ -118,6 +133,7 @@
             this.btnLeft.Size = new System.Drawing.Size(18, 57);
             this.btnLeft.TabIndex = 12;
             this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.Button_Click);
             // 
             // btnDown
             // 
@@ -130,6 +146,7 @@
             this.btnDown.Size = new System.Drawing.Size(77, 19);
             this.btnDown.TabIndex = 11;
             this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.Button_Click);
             // 
             // txtDate
             // 
@@ -235,18 +252,6 @@
             this.txtTitle.ReadOnly = true;
             this.txtTitle.Size = new System.Drawing.Size(195, 20);
             this.txtTitle.TabIndex = 5;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(298, 24);
-            this.btnEdit.Name = "btnEdit";
-            this.tlPanel.SetRowSpan(this.btnEdit, 3);
-            this.btnEdit.Size = new System.Drawing.Size(25, 57);
-            this.btnEdit.TabIndex = 15;
-            this.btnEdit.UseVisualStyleBackColor = true;
             // 
             // ResultSetControl
             // 

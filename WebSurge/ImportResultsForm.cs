@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -11,11 +12,10 @@ using System.Windows.Forms;
 
 namespace WebSurge
 {
-    public partial class ImportResultsForm : Form
+    public partial class ImportResultsForm : Form, IResultSetControlContainer
     {
-        List<HttpRequestData> _currentResults;
-        List<HttpResultSet> _includedData = new List<HttpResultSet>();
-        List<HttpResultSet> _excludedData = new List<HttpResultSet>();
+        ObservableCollection<HttpResultSet> _includedData = new ObservableCollection<HttpResultSet>();
+        ObservableCollection<HttpResultSet> _excludedData = new ObservableCollection<HttpResultSet>();
 
         private enum ImportFileType
         {
@@ -25,31 +25,59 @@ namespace WebSurge
             Xml
         }
 
+        private enum ListType
+        {
+            Included, 
+            Excluded
+        }
+
         public ImportResultsForm(List<HttpRequestData> currentResults)
         {
             InitializeComponent();
-            _currentResults = currentResults;
+            _includedData.CollectionChanged += IncludedData_CollectionChanged;
+            _excludedData.CollectionChanged += ExcludedData_CollectionChanged;
             _includedData = HttpResultSet.GetHttpResultSetsFromRequests(currentResults, null);
         }
 
         private void ImportResultsForm_Shown(object sender, EventArgs e)
         {
-            RefreshUILists();
-            string test = string.Empty;
+            RefreshUILists(ListType.Included);
         }
 
-        private void RefreshUILists()
+        private void ExcludedData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            foreach(HttpResultSet set in _includedData)
-            {
-                ResultSetControl controlToAdd = new ResultSetControl(set, ResultSetControl.ControlMode.Included);
-                includedFlowPanel.Controls.Add(controlToAdd);
-            }
+            RefreshUILists(ListType.Excluded);
+        }
 
-            foreach (HttpResultSet set in _excludedData)
+        private void IncludedData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RefreshUILists(ListType.Included);
+        }
+
+        
+
+        private void RefreshUILists(ListType type)
+        {
+            if(type== ListType.Included)
             {
-                ResultSetControl controlToAdd = new ResultSetControl(set, ResultSetControl.ControlMode.Imported);
-                importedFlowPanel.Controls.Add(controlToAdd);
+                includedFlowPanel.Controls.Clear();
+                foreach (HttpResultSet set in _includedData)
+                {
+                    ResultSetControl controlToAdd = new ResultSetControl(this, set, ResultSetControl.ControlMode.Included);
+                    includedFlowPanel.Controls.Add(controlToAdd);
+                }
+                return;
+            }
+            
+            if(type == ListType.Excluded)
+            {
+                importedFlowPanel.Controls.Clear();
+                foreach (HttpResultSet set in _excludedData)
+                {
+                    ResultSetControl controlToAdd = new ResultSetControl(this, set, ResultSetControl.ControlMode.Excluded);
+                    importedFlowPanel.Controls.Add(controlToAdd);
+                }
+                return;
             }
         }
 
@@ -110,17 +138,53 @@ namespace WebSurge
 
             return toReturn;
         }
+
+        public void ResultSetControlUp_Click(object sender, ResultSetControlEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResultSetControlDown_Click(object sender, ResultSetControlEventArgs e)
+        {
+            if (e.Mode== ResultSetControl.ControlMode.Included)
+            {
+                int position = _includedData.IndexOf(e.ResultSet);
+                if (position < _includedData.Count - 2)
+                    _includedData.Move(position, position + 1);
+            }
+            else
+            {
+                int position = _excludedData.IndexOf(e.ResultSet);
+                if (position < _excludedData.Count - 2)
+                    _excludedData.Move(position, position + 1);
+            }
+        }
+
+        public void ResultSetControlMoveToExcluded_Click(object sender, ResultSetControlEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResultSetControlMoveToIncluded_Click(object sender, ResultSetControlEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResultSetControlDataChange_Click(object sender, ResultSetControlEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
     public class HttpResultSet
     {
-        public Guid Id;
-        public string Filename;
-        public string Url;
-        public string Title;
-        public DateTime Date;
-        public double DurationSeconds;
+        public Guid Id { get; private set; }
+        public string Filename { get; private set; }
+        public string Url { get; private set; }
+        public string Title { get; set; }
+        public DateTime Date { get; private set; }
+        public double DurationSeconds { get; private set; }
         public List<HttpRequestData> Data;
 
         public HttpResultSet(string filename, string url, string title, DateTime date, double duration, List<HttpRequestData> data)
@@ -135,9 +199,9 @@ namespace WebSurge
         }
 
 
-        public static List<HttpResultSet> GetHttpResultSetsFromRequests(List<HttpRequestData> data, string filename)
+        public static ObservableCollection<HttpResultSet> GetHttpResultSetsFromRequests(List<HttpRequestData> data, string filename)
         {
-            List<HttpResultSet> toReturn = new List<HttpResultSet>();
+           ObservableCollection<HttpResultSet> toReturn = new ObservableCollection<HttpResultSet>();
 
             var sets = (from d in data
                         select new { d.Url, d.Name }).Distinct().ToList();

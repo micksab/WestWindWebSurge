@@ -1098,6 +1098,7 @@ namespace WebSurge
             {
                 ImportResultsForm importForm = new ImportResultsForm(StressTester.Results);
                 importForm.ShowDialog();
+                importForm.Dispose();
             }
                 
 

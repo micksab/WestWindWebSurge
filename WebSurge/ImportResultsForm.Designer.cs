@@ -178,6 +178,7 @@
             this.includedFlowPanel.Name = "includedFlowPanel";
             this.includedFlowPanel.Size = new System.Drawing.Size(387, 503);
             this.includedFlowPanel.TabIndex = 1;
+            this.includedFlowPanel.WrapContents = false;
             // 
             // ImportResultsForm
             // 
