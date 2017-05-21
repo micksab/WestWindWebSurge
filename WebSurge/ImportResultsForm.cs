@@ -25,60 +25,50 @@ namespace WebSurge
             Xml
         }
 
-        private enum ListType
-        {
-            Included, 
-            Excluded
-        }
-
         public ImportResultsForm(List<HttpRequestData> currentResults)
         {
             InitializeComponent();
-            _includedData.CollectionChanged += IncludedData_CollectionChanged;
-            _excludedData.CollectionChanged += ExcludedData_CollectionChanged;
             _includedData = HttpResultSet.GetHttpResultSetsFromRequests(currentResults, null);
         }
 
         private void ImportResultsForm_Shown(object sender, EventArgs e)
         {
-            RefreshUILists(ListType.Included);
-        }
-
-        private void ExcludedData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            RefreshUILists(ListType.Excluded);
-        }
-
-        private void IncludedData_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            RefreshUILists(ListType.Included);
+            RefreshUILists(HttpResultSet.ListType.Included);
         }
 
         
 
-        private void RefreshUILists(ListType type)
+        
+
+        private void RefreshUILists(HttpResultSet.ListType type)
         {
-            if(type== ListType.Included)
+            if(type== HttpResultSet.ListType.Included)
             {
+                includedFlowPanel.SuspendLayout();
                 includedFlowPanel.Controls.Clear();
                 foreach (HttpResultSet set in _includedData)
                 {
-                    ResultSetControl controlToAdd = new ResultSetControl(this, set, ResultSetControl.ControlMode.Included);
+                    ResultSetControl controlToAdd = new ResultSetControl(this, set, HttpResultSet.ListType.Included);
                     includedFlowPanel.Controls.Add(controlToAdd);
                 }
+                includedFlowPanel.ResumeLayout();
                 return;
             }
             
-            if(type == ListType.Excluded)
+            if(type == HttpResultSet.ListType.Excluded)
             {
-                importedFlowPanel.Controls.Clear();
+                excludedFlowPanel.SuspendLayout();
+                excludedFlowPanel.Controls.Clear();
                 foreach (HttpResultSet set in _excludedData)
                 {
-                    ResultSetControl controlToAdd = new ResultSetControl(this, set, ResultSetControl.ControlMode.Excluded);
-                    importedFlowPanel.Controls.Add(controlToAdd);
+                    ResultSetControl controlToAdd = new ResultSetControl(this, set, HttpResultSet.ListType.Excluded);
+                    excludedFlowPanel.Controls.Add(controlToAdd);
                 }
+                excludedFlowPanel.ResumeLayout();
+
                 return;
             }
+
         }
 
 
@@ -141,33 +131,72 @@ namespace WebSurge
 
         public void ResultSetControlUp_Click(object sender, ResultSetControlEventArgs e)
         {
-            throw new NotImplementedException();
+            int position = 0;
+            ResultSetControl control = (ResultSetControl)sender;
+            switch (e.Mode)
+            {
+                case HttpResultSet.ListType.Included:
+                    position = _includedData.IndexOf(e.ResultSet);
+                    _includedData.Move(position, position - 1);
+                    includedFlowPanel.Controls.SetChildIndex(control, position - 1);
+                    includedFlowPanel.ScrollControlIntoView(control);
+                    break;
+                default:
+                    position = _excludedData.IndexOf(e.ResultSet);
+                    _excludedData.Move(position, position - 1);
+                    excludedFlowPanel.Controls.SetChildIndex(control, position - 1);
+                    excludedFlowPanel.ScrollControlIntoView(control);
+                    break;
+            }
         }
 
         public void ResultSetControlDown_Click(object sender, ResultSetControlEventArgs e)
         {
-            if (e.Mode== ResultSetControl.ControlMode.Included)
+            int position = 0;
+            ResultSetControl control = (ResultSetControl)sender;
+            switch (e.Mode)
             {
-                int position = _includedData.IndexOf(e.ResultSet);
-                if (position < _includedData.Count - 2)
+                case HttpResultSet.ListType.Included:
+                    position = _includedData.IndexOf(e.ResultSet);
                     _includedData.Move(position, position + 1);
-            }
-            else
-            {
-                int position = _excludedData.IndexOf(e.ResultSet);
-                if (position < _excludedData.Count - 2)
+                    includedFlowPanel.Controls.SetChildIndex(control, position + 1);
+                    includedFlowPanel.ScrollControlIntoView(control);
+                    break;
+                default:
+                    position = _excludedData.IndexOf(e.ResultSet);
                     _excludedData.Move(position, position + 1);
+                    excludedFlowPanel.Controls.SetChildIndex(control, position + 1);
+                    excludedFlowPanel.ScrollControlIntoView(control);
+                    break;
             }
         }
 
         public void ResultSetControlMoveToExcluded_Click(object sender, ResultSetControlEventArgs e)
         {
-            throw new NotImplementedException();
+            ResultSetControl control = (ResultSetControl)sender;
+            HttpResultSet set = e.ResultSet;
+
+            control.SetMode(HttpResultSet.ListType.Excluded);
+            _includedData.Remove(set);
+            includedFlowPanel.Controls.Remove(control);
+            _excludedData.Add(set);
+            excludedFlowPanel.Controls.Add(control);
+            control.Focus();
+            excludedFlowPanel.ScrollControlIntoView(control);
         }
 
         public void ResultSetControlMoveToIncluded_Click(object sender, ResultSetControlEventArgs e)
         {
-            throw new NotImplementedException();
+            ResultSetControl control = (ResultSetControl)sender;
+            HttpResultSet set = e.ResultSet;
+
+            control.SetMode(HttpResultSet.ListType.Included);
+            _excludedData.Remove(set);
+            excludedFlowPanel.Controls.Remove(control);
+            _includedData.Add(set);
+            includedFlowPanel.Controls.Add(control);
+            control.Focus();
+            includedFlowPanel.ScrollControlIntoView(control);
         }
 
         public void ResultSetControlDataChange_Click(object sender, ResultSetControlEventArgs e)
@@ -186,6 +215,12 @@ namespace WebSurge
         public DateTime Date { get; private set; }
         public double DurationSeconds { get; private set; }
         public List<HttpRequestData> Data;
+
+        public enum ListType
+        {
+            Included,
+            Excluded
+        }
 
         public HttpResultSet(string filename, string url, string title, DateTime date, double duration, List<HttpRequestData> data)
         {

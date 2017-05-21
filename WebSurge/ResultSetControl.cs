@@ -14,66 +14,114 @@ namespace WebSurge
 {
     public partial class ResultSetControl : UserControl
     {
-        public enum ControlMode
-        {
-            Included, 
-            Excluded
-        }
-
         private HttpResultSet _set;
-        private ControlMode _mode;
+        private HttpResultSet.ListType _mode;
+        private IResultSetControlContainer _container;
 
-        public event EventHandler<ResultSetControlEventArgs> MoveToExcludedList_Click;
-        public event EventHandler<ResultSetControlEventArgs> MoveToIncludedList_Click;
-        public event EventHandler<ResultSetControlEventArgs> MoveUp_Click;
-        public event EventHandler<ResultSetControlEventArgs> MoveDown_Click;
-        public event EventHandler<ResultSetControlEventArgs> DataChange_Click;
+        public event EventHandler<ResultSetControlEventArgs> OnMoveToExcludedList_Click;
+        public event EventHandler<ResultSetControlEventArgs> OnMoveToIncludedList_Click;
+        public event EventHandler<ResultSetControlEventArgs> OnMoveUp_Click;
+        public event EventHandler<ResultSetControlEventArgs> OnMoveDown_Click;
+        public event EventHandler<ResultSetControlEventArgs> OnEdit_Click;
 
-        public ResultSetControl(IResultSetControlContainer container, HttpResultSet resultSet, ControlMode mode)
+        public ResultSetControl(IResultSetControlContainer container, HttpResultSet resultSet, HttpResultSet.ListType mode)
         {
             InitializeComponent();
-            CultureInfo ci = CultureInfo.CurrentCulture;
 
             _set = resultSet;
-            _mode = mode;
+            SetMode(mode);
+            _container = container;
+
+            RefreshResultSetControl();
+            RegisterToContainerHandlers();
+            
+
+        }
+       
+
+        public void RefreshResultSetControl()
+        {
+            CultureInfo ci = CultureInfo.CurrentCulture;
+
             txtTitle.Text = _set.Title == string.Empty ? "---" : _set.Title;
             txtFilename.Text = _set.Filename == string.Empty ? "---" : _set.Filename;
             txtUrl.Text = _set.Url;
             txtDate.Text = _set.Date.ToLocalTime().ToString("g", ci);
             txtDuration.Text = string.Format("{0:0.00} seconds", _set.DurationSeconds);
 
-            switch(mode)
-            {
-                case ControlMode.Included:
-                    btnRight.Enabled = true;
-                    btnLeft.Enabled = false;
-                    break;
-                default:
-                    btnRight.Enabled = false;
-                    btnLeft.Enabled = true;
-                    break;
-            }
+            
+        }
 
-            MoveUp_Click += new EventHandler<ResultSetControlEventArgs>(container.ResultSetControlUp_Click);
-            MoveDown_Click += new EventHandler<ResultSetControlEventArgs>(container.ResultSetControlDown_Click);
-            MoveToExcludedList_Click += new EventHandler<ResultSetControlEventArgs>(container.ResultSetControlMoveToExcluded_Click);
-            MoveToIncludedList_Click += new EventHandler<ResultSetControlEventArgs>(container.ResultSetControlMoveToIncluded_Click);
-            DataChange_Click += new EventHandler<ResultSetControlEventArgs>(container.ResultSetControlDataChange_Click);
+        private void RegisterToContainerHandlers()
+        {
+            //Self-register to the parent container's IResultSetControlContainer event handlers
+            OnMoveUp_Click += new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlUp_Click);
+            OnMoveDown_Click += new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlDown_Click);
+            OnMoveToExcludedList_Click += new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlMoveToExcluded_Click);
+            OnMoveToIncludedList_Click += new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlMoveToIncluded_Click);
+            OnEdit_Click += new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlDataChange_Click);
 
         }
+
+        private void UnegisterFromContainerHandlers()
+        {
+            //Self-unregister to the parent container's IResultSetControlContainer event handlers
+            OnMoveUp_Click -= new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlUp_Click);
+            OnMoveDown_Click -= new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlDown_Click);
+            OnMoveToExcludedList_Click -= new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlMoveToExcluded_Click);
+            OnMoveToIncludedList_Click -= new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlMoveToIncluded_Click);
+            OnEdit_Click -= new EventHandler<ResultSetControlEventArgs>(_container.ResultSetControlDataChange_Click);
+        }
+
+
+        public void SetMode(HttpResultSet.ListType mode)
+        {
+            _mode = mode;
+            btnRight.Enabled = (mode == HttpResultSet.ListType.Included ? false : true);
+            btnLeft.Enabled = (mode == HttpResultSet.ListType.Included ? true : false);
+        }
+
+         
 
         private void Button_Click(object sender, EventArgs e)
         {
             if(sender == btnUp)
-                MoveUp_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+                OnMoveUp_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
             else if(sender== btnDown)
-                MoveDown_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+                OnMoveDown_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
             else if (sender == btnLeft)
-                MoveToExcludedList_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+                OnMoveToExcludedList_Click?.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
             else if (sender == btnRight)
-                MoveToIncludedList_Click.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+                OnMoveToIncludedList_Click.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+            else if (sender == btnEdit)
+                OnEdit_Click.Invoke(this, new ResultSetControlEventArgs(_set, _mode));
+        }
+
+        private void ResultSetControl_LocationChanged(object sender, EventArgs e)
+        {
+            if (ReferenceEquals(Parent.Controls.OfType<ResultSetControl>().FirstOrDefault(), this))
+            {
+                btnUp.Enabled = false;
+            }
+            else if (ReferenceEquals(Parent.Controls.OfType<ResultSetControl>().LastOrDefault(), this))
+            {
+                btnDown.Enabled = false;
+            }
             else
-                throw new NotImplementedException();
+            {
+                btnUp.Enabled = true;
+                btnDown.Enabled = true;
+            }
+        }
+
+        private void ResultSetControl_Enter(object sender, EventArgs e)
+        {
+            BackColor = Color.LightBlue;
+        }
+
+        private void ResultSetControl_Leave(object sender, EventArgs e)
+        {
+            BackColor = SystemColors.Control;
         }
     }
 
@@ -81,9 +129,9 @@ namespace WebSurge
     public class ResultSetControlEventArgs : EventArgs
     {
         public HttpResultSet ResultSet { get; }
-        public ControlMode Mode { get; }
+        public HttpResultSet.ListType Mode { get; }
 
-        public ResultSetControlEventArgs(HttpResultSet set, ControlMode mode) : base()
+        public ResultSetControlEventArgs(HttpResultSet set, HttpResultSet.ListType mode) : base()
         {
             ResultSet = set;
             Mode = mode;

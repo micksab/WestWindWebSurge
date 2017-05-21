@@ -38,7 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.setsSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.importedFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.excludedFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.includedFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblSplitContainer)).BeginInit();
@@ -149,7 +149,7 @@
             // 
             // setsSplitContainer.Panel1
             // 
-            this.setsSplitContainer.Panel1.Controls.Add(this.importedFlowPanel);
+            this.setsSplitContainer.Panel1.Controls.Add(this.excludedFlowPanel);
             // 
             // setsSplitContainer.Panel2
             // 
@@ -159,15 +159,16 @@
             this.setsSplitContainer.SplitterWidth = 1;
             this.setsSplitContainer.TabIndex = 3;
             // 
-            // importedFlowPanel
+            // excludedFlowPanel
             // 
-            this.importedFlowPanel.AutoScroll = true;
-            this.importedFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.importedFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.importedFlowPanel.Location = new System.Drawing.Point(0, 0);
-            this.importedFlowPanel.Name = "importedFlowPanel";
-            this.importedFlowPanel.Size = new System.Drawing.Size(388, 503);
-            this.importedFlowPanel.TabIndex = 0;
+            this.excludedFlowPanel.AutoScroll = true;
+            this.excludedFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.excludedFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.excludedFlowPanel.Location = new System.Drawing.Point(0, 0);
+            this.excludedFlowPanel.Name = "excludedFlowPanel";
+            this.excludedFlowPanel.Size = new System.Drawing.Size(388, 503);
+            this.excludedFlowPanel.TabIndex = 0;
+            this.excludedFlowPanel.WrapContents = false;
             // 
             // includedFlowPanel
             // 
@@ -221,7 +222,7 @@
         private System.Windows.Forms.SplitContainer setsSplitContainer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.FlowLayoutPanel importedFlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel excludedFlowPanel;
         private System.Windows.Forms.FlowLayoutPanel includedFlowPanel;
     }
 }

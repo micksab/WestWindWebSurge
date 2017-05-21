@@ -262,6 +262,9 @@
             this.Name = "ResultSetControl";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Size = new System.Drawing.Size(364, 119);
+            this.LocationChanged += new System.EventHandler(this.ResultSetControl_LocationChanged);
+            this.Enter += new System.EventHandler(this.ResultSetControl_Enter);
+            this.Leave += new System.EventHandler(this.ResultSetControl_Leave);
             this.tlPanel.ResumeLayout(false);
             this.tlPanel.PerformLayout();
             this.ResumeLayout(false);
